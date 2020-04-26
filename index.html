@@ -47,10 +47,11 @@
     <textarea id="escaped"></textarea>
 
     <script>
-        // https://esdiscuss.org/topic/regexp-escape#content-54
-        const REGEXP_SYNTAX_CHARACTER = /[\^$\\.*+?()[\]{}|]/g;
-        function escape(value) {
-            return value.replace(REGEXP_SYNTAX_CHARACTER, '\\$&');
+        // Taken from https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+        function escape(string) {
+            return string
+                .replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+                .replace(/-/g, '\\x2d');
         }
 
         /**
